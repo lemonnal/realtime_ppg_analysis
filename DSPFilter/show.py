@@ -13,7 +13,7 @@ plt.rcParams['font.sans-serif'] = ['DejaVu Sans']
 plt.rcParams['axes.unicode_minus'] = False
 
 # ==================== 配置开关 ====================
-USE_PHASE_COMPENSATION = False  # 是否使用相位延迟补偿（True=对齐波形, False=不对齐）
+USE_PHASE_COMPENSATION = True  # 是否使用相位延迟补偿（True=对齐波形, False=不对齐）
 # ================================================
 
 # 文件路径
