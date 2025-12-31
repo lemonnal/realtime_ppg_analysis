@@ -83,30 +83,9 @@ workspace-ppg/
 
 ### C++ 模块构建
 
-1. 进入 C++ 项目目录：
-```bash
-cd DSPFilter
-```
-
-2. 创建构建目录并配置：
-```bash
-mkdir -p build && cd build
-cmake ..
-```
-
-3. 编译项目：
-```bash
-make
-```
-
-或使用提供的构建脚本：
+使用提供的构建和运行脚本：
 ```bash
 bash cmake_build.sh
-```
-
-4. 运行程序：
-```bash
-./DSPFilter
 ```
 
 ### Python 模块使用
@@ -136,8 +115,13 @@ python but_ppg.py
 
 在 `DSPFilter/record.txt` 中配置输入文件列表：
 ```
-data_path/sample_1.txt
-data_path/sample_2.txt
+2_1
+2_2
+2_3
+3_1
+3_2
+3_3
+6_1
 ```
 
 #### 滤波器配置
@@ -154,7 +138,6 @@ int filter_order = 4;      // 滤波器阶数
 
 滤波后的信号保存在 `output_data/` 目录，文件命名格式：
 - `<filename>_filtered.txt`：滤波后信号
-- `<filename>_peaks.txt`：峰值位置
 
 ### Python 模块
 
@@ -227,19 +210,3 @@ plt.show()
 - **健康监测**：家庭健康监护系统
 - **运动科学**：运动过程中的血氧变化监测
 - **睡眠分析**：睡眠呼吸暂停综合征筛查
-
-## 贡献指南
-
-欢迎提交 Issue 和 Pull Request！
-
-## 许可证
-
-本项目采用 MIT 许可证。详见 LICENSE 文件。
-
-## 联系方式
-
-如有问题或建议，请提交 Issue 或联系项目维护者。
-
----
-
-**注意**：本系统仅用于研究和教育目的，不应直接用于医疗诊断。临床应用需经过严格的医疗器械认证。
