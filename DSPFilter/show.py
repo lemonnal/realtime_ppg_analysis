@@ -18,8 +18,8 @@ USE_PHASE_COMPENSATION = True  # 是否使用相位延迟补偿（True=对齐波
 
 # 文件路径
 original_file = '/home/yogsothoth/桌面/workspace-ppg/DataSet/PPG-BP/2_1.txt'
-# filtered_file = '/home/yogsothoth/桌面/workspace-ppg/DSPFilter/PPG-BP/2_1_filtered_zerophase.txt'
-filtered_file = '/home/yogsothoth/桌面/workspace-ppg/DSPFilter/PPG-BP/2_1_filtered_oneway.txt'
+# filtered_file = '/home/yogsothoth/桌面/workspace-ppg/DSPFilter/output_data/2_1_filtered_zerophase.txt'
+filtered_file = '/home/yogsothoth/桌面/workspace-ppg/DSPFilter/output_data/2_1_filtered_oneway.txt'
 
 print("=" * 60)
 print("读取原始PPG数据...")

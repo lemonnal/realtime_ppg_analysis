@@ -23,14 +23,23 @@ endif()
 
 
 # 创建示例可执行文件
-add_executable(main_example main.cpp)
+add_executable(main_example 
+    main.cpp
+    src/signal_io.cpp
+    src/ppg_filters.cpp
+    src/ppg_analysis.cpp
+    src/signal_utils.cpp    
+    src/find_peaks.cpp
+)
 
 # 链接 DSPFilters 库
 target_link_libraries(main_example PRIVATE DSPFilters)
 
 # 设置包含目录
 target_include_directories(main_example PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}/DSPFilters/include
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 # 禁用来自第三方库头文件的警告

@@ -274,20 +274,20 @@ std::vector<int> find_peaks(
         return peaks;
     }
     
-    // 步骤2：应用height约束
-    if (std::isfinite(min_height)) {
-        peaks = filter_peaks_by_height(peaks, signal, min_height);
-    }
+    // // 步骤2：应用height约束
+    // if (std::isfinite(min_height)) {
+    //     peaks = filter_peaks_by_height(peaks, signal, min_height);
+    // }
     
     // 步骤3：应用distance约束（核心！）
     if (distance > 0) {
         peaks = filter_peaks_by_distance(peaks, signal, distance);
     }
     
-    // 步骤4：应用prominence约束
-    if (min_prominence >= 0.0f) {
-        peaks = filter_peaks_by_prominence(peaks, signal, min_prominence);
-    }
+    // // 步骤4：应用prominence约束
+    // if (min_prominence >= 0.0f) {
+    //     peaks = filter_peaks_by_prominence(peaks, signal, min_prominence);
+    // }
     
     return peaks;
 }
