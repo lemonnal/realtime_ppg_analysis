@@ -14,9 +14,13 @@ plt.rcParams['axes.unicode_minus'] = False
 
 # ==================== 配置开关 ====================
 USE_PHASE_COMPENSATION = True  # 是否使用相位延迟补偿（True=对齐波形, False=不对齐）
+OUTPUT_FIGURE_DIR = '/home/yogsothoth/桌面/workspace-ppg/DSPFilter/output_signal_figure'  # 输出图像目录
 # ================================================
 
-# 从 record.txt 读取文件名（支持多行格式）
+# 创建输出目录
+os.makedirs(OUTPUT_FIGURE_DIR, exist_ok=True)
+
+# 读取文件名（支持多行格式）
 record_file_path = '/home/yogsothoth/桌面/workspace-ppg/DSPFilter/record.txt'
 try:
     with open(record_file_path, 'r') as f:
@@ -155,17 +159,18 @@ for file_name in file_list:
     # 调整布局
     plt.tight_layout()
 
-    # # 保存图形
-    # output_path = '/home/yogsothoth/桌面/workspace-ppg/DSPFilter/PPG-BP/comparison.png'
-    # plt.savefig(output_path, dpi=300, bbox_inches='tight')
-    # print(f"\n图形已保存到: {output_path}")
+    # 保存图形
+    output_path = os.path.join(OUTPUT_FIGURE_DIR, f'{file_name}.png')
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    print(f"  ✓ 图形已保存到: {output_path}")
 
-    # 显示图形
-    plt.show()
+    # 关闭图形，释放内存
+    # plt.show()
+    plt.close(fig)
 
-    print("\n" + "=" * 60)
-    print("完成!")
-    print("=" * 60)
+    # print("\n" + "=" * 60)
+    # print("完成!")
+    # print("=" * 60)
 
     # 打印统计信息
     print("\n统计信息:")

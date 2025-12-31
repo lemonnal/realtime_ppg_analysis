@@ -1,6 +1,10 @@
 /DataSet
 /DSPFilters-master
 /DSPFilter/output_data
+/DSPFilter/output_signal_figure
+
+# DSPFilters构建产物
+DSPFilter/build/
 
 *.html
 *.vcxproj
@@ -268,11 +272,6 @@ blog.csdn.net-*.html
 
 # 构建脚本产物
 *.sh.log
-
-# DSPFilters构建产物
-DSPFilter/build/
-DSPFilters_build/
-libDSPFilters.a
 
 # SPO2_HR构建产物
 SPO2_HR/*.exe

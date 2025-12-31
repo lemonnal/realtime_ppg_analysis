@@ -9,12 +9,12 @@
 
 int main() {
     try {
-        // 从 record.txt 读取文件名（支持多行格式）
+        // 读取文件名（支持多行格式）
         std::ifstream record_file("/home/yogsothoth/桌面/workspace-ppg/DSPFilter/record.txt");
         std::vector<std::string> file_list;
 
         if (!record_file.is_open()) {
-            std::cerr << "错误：无法打开 record.txt 文件" << std::endl;
+            std::cerr << "错误：无法打开 records_all.txt 文件" << std::endl;
             return 1;
         }
 
