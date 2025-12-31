@@ -21,22 +21,23 @@ OUTPUT_FIGURE_DIR = '/home/yogsothoth/桌面/workspace-ppg/DSPFilter/output_sign
 os.makedirs(OUTPUT_FIGURE_DIR, exist_ok=True)
 
 # 读取文件名（支持多行格式）
-record_file_path = '/home/yogsothoth/桌面/workspace-ppg/DSPFilter/record.txt'
+record_name = 'record.txt'
+record_file_path = '/home/yogsothoth/桌面/workspace-ppg/DSPFilter/' + record_name
 try:
     with open(record_file_path, 'r') as f:
         # 读取所有行，去除每行的空白和空行
         file_list = [line.strip() for line in f.readlines() if line.strip()]
 
     if not file_list:
-        raise ValueError("record.txt 文件为空")
+        raise ValueError(record_name + " 文件为空")
 
-    print(f"📂 从 record.txt 读取到 {len(file_list)} 个文件:")
+    print(f"📂 从 {record_name} 读取到 {len(file_list)} 个文件:")
     for idx, name in enumerate(file_list, 1):
         print(f"   {idx}. {name}")
     print()
 
 except Exception as e:
-    print(f"❌ 错误：无法读取 record.txt - {e}")
+    print(f"❌ 错误：无法读取 {record_name} - {e}")
     exit(1)
 
 

@@ -10,11 +10,12 @@
 int main() {
     try {
         // 读取文件名（支持多行格式）
-        std::ifstream record_file("/home/yogsothoth/桌面/workspace-ppg/DSPFilter/record.txt");
+        std::string record_name = "record.txt";
+        std::ifstream record_file("/home/yogsothoth/桌面/workspace-ppg/DSPFilter/" + record_name);
         std::vector<std::string> file_list;
 
         if (!record_file.is_open()) {
-            std::cerr << "错误：无法打开 records_all.txt 文件" << std::endl;
+            std::cerr << "错误：无法打开 " << record_name << " 文件" << std::endl;
             return 1;
         }
 
@@ -33,11 +34,11 @@ int main() {
         record_file.close();
 
         if (file_list.empty()) {
-            std::cerr << "错误：record.txt 文件为空" << std::endl;
+            std::cerr << "错误：" << record_name << " 文件为空" << std::endl;
             return 1;
         }
 
-        std::cout << "📂 从 record.txt 读取到 " << file_list.size() << " 个文件:" << std::endl;
+        std::cout << "📂 从 " << record_name << " 读取到 " << file_list.size() << " 个文件:" << std::endl;
         for (size_t i = 0; i < file_list.size(); ++i) {
             std::cout << "   " << (i + 1) << ". " << file_list[i] << std::endl;
         }
