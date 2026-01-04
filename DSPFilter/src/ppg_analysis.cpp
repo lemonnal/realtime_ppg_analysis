@@ -204,5 +204,98 @@ bool calculate_spo2_from_ppg(
     }
 }
 
+// ===================== 心率计算函数 =====================
+
+bool calculate_heart_rate(
+    const std::vector<int>& peaks,
+    double sample_rate,
+    float& heart_rate,
+    float& hrv
+) {
+    std::cout << "\n【心率计算】" << std::endl;
+    std::cout << "  算法: 基于峰值间隔的时域方法" << std::endl;
+
+    if (peaks.size() < 2) {
+        std::cout << "  错误: 峰值数量不足，无法计算心率" << std::endl;
+        return false;
+    }
+
+    // 计算相邻峰值之间的间隔（单位：样本数）
+    std::vector<float> intervals;
+    std::vector<float> intervals_sec;  // 间隔（秒）
+
+    for (size_t i = 1; i < peaks.size(); i++) {
+        int diff_samples = peaks[i] - peaks[i - 1];
+        float diff_sec = diff_samples / static_cast<float>(sample_rate);
+        intervals.push_back(static_cast<float>(diff_samples));
+        intervals_sec.push_back(diff_sec);
+    }
+
+    // 计算平均间隔
+    float sum_intervals = 0.0f;
+    for (float interval : intervals_sec) {
+        sum_intervals += interval;
+    }
+    float mean_interval = sum_intervals / intervals_sec.size();
+
+    // 计算心率 (BPM = 60 / 平均间隔(秒))
+    heart_rate = 60.0f / mean_interval;
+
+    // 计算心率变异性 (HRV) - 使用间隔的标准差
+    float variance = 0.0f;
+    for (float interval : intervals_sec) {
+        float diff = interval - mean_interval;
+        variance += diff * diff;
+    }
+    variance /= intervals_sec.size();
+    float std_dev_sec = std::sqrt(variance);
+    hrv = std_dev_sec * 1000.0f;  // 转换为毫秒
+
+    std::cout << "\n  峰值数量: " << peaks.size() << std::endl;
+    std::cout << "  有效间隔数: " << intervals.size() << std::endl;
+
+    // 打印前5个间隔
+    std::cout << "\n  前" << std::min(5, (int)intervals.size()) << "个峰值间隔:" << std::endl;
+    for (int i = 0; i < std::min(5, (int)intervals.size()); i++) {
+        std::cout << "    间隔 " << (i+1) << ": " << std::fixed << std::setprecision(3)
+                  << intervals_sec[i] << " s (" << std::setprecision(1)
+                  << (60.0f / intervals_sec[i]) << " BPM)" << std::endl;
+    }
+
+    std::cout << "\n  平均RR间隔: " << std::setprecision(3) << mean_interval << " s" << std::endl;
+    std::cout << "  平均RR间隔: " << std::setprecision(1) << (mean_interval * 1000.0f) << " ms" << std::endl;
+
+    std::cout << "\n  ┌─────────────────────────────────┐" << std::endl;
+    std::cout << "  │  估算心率: " << std::setprecision(1) << std::setw(5) << heart_rate
+              << " BPM         │" << std::endl;
+    std::cout << "  └─────────────────────────────────┘" << std::endl;
+
+    std::cout << "\n  心率变异性 (SDNN): " << std::setprecision(2) << hrv << " ms" << std::endl;
+
+    // 心率范围评估
+    std::cout << "\n  心率评估: ";
+    if (heart_rate >= 60.0f && heart_rate <= 100.0f) {
+        std::cout << "正常 ✓ (60-100 BPM)" << std::endl;
+    } else if (heart_rate < 60.0f) {
+        std::cout << "心动过缓 ⚠ (< 60 BPM)" << std::endl;
+    } else {
+        std::cout << "心动过速 ⚠ (> 100 BPM)" << std::endl;
+    }
+
+    // HRV评估
+    std::cout << "  HRV评估: ";
+    if (hrv >= 30.0f) {
+        std::cout << "良好 ✓ (≥ 30 ms)" << std::endl;
+    } else if (hrv >= 20.0f) {
+        std::cout << "一般 ⚠ (20-30 ms)" << std::endl;
+    } else {
+        std::cout << "较低 ⚠ (< 20 ms)" << std::endl;
+    }
+
+    std::cout << "\n  注意: 此为估算值，仅供参考" << std::endl;
+
+    return true;
+}
+
 } // namespace ppg
 

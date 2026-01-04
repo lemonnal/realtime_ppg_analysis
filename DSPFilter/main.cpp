@@ -124,13 +124,18 @@ int main() {
             float ac_component = 0.0f;
             ppg::detect_peaks_and_valleys(filtered_signal, 1000.0, 0.4, peaks, valleys, ac_component);
 
-            // ========== 步骤4: SpO2估算 ==========
+            // ========== 步骤4: 心率计算 ==========
+            float heart_rate = 0.0f;
+            float hrv = 0.0f;
+            ppg::calculate_heart_rate(peaks, 1000.0, heart_rate, hrv);
+
+            // ========== 步骤5: SpO2估算 ==========
             float spo2 = 0.0f;
             float ratio = 0.0f;
             ppg::calculate_spo2_from_ppg(input_signal, filtered_signal, peaks, valleys,
                                     ac_component, spo2, ratio);
 
-            // ========== 步骤5: 信号统计 ==========
+            // ========== 步骤6: 信号统计 ==========
             ppg::print_signal_statistics(input_signal, filtered_signal);
         }
     } catch (const std::exception& e) {

@@ -44,6 +44,21 @@ bool calculate_spo2_from_ppg(
     float& ratio
 );
 
+/**
+ * @brief 基于峰值间隔计算心率
+ * @param peaks 峰值索引数组
+ * @param sample_rate 采样率 (Hz)
+ * @param heart_rate 输出：估算的心率 (BPM)
+ * @param hrv 输出：心率变异性 (标准差，单位ms)
+ * @return true表示计算成功
+ */
+bool calculate_heart_rate(
+    const std::vector<int>& peaks,
+    double sample_rate,
+    float& heart_rate,
+    float& hrv
+);
+
 } // namespace ppg
 
 #endif // PPG_ANALYSIS_HPP
