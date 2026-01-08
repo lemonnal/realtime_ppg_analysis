@@ -1,13 +1,12 @@
 /DataSet
-/DSPFilters-master
-/DSPFilter/output_data
-/DSPFilter/output_signal_figure
+/output_data
+/output_signal_figure
+/aaaPyTest
+/aaaInfo
 
 .cursor
 .vscode
 .idea
-
-*.zip
 
 # DSPFilters构建产物
 DSPFilter/build/

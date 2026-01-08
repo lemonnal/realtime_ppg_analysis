@@ -11,7 +11,7 @@ int main() {
     try {
         // 读取文件名（支持多行格式）
         std::string record_name = "record.txt";
-        std::ifstream record_file("/home/yogsothoth/桌面/workspace-ppg/DSPFilter/" + record_name);
+        std::ifstream record_file("/home/yogsothoth/桌面/workspace-ppg/" + record_name);
         std::vector<std::string> file_list;
 
         if (!record_file.is_open()) {
@@ -47,8 +47,8 @@ int main() {
         for (const std::string& file_name : file_list) {
             // PPG信号处理参数
             std::string input_file = "/home/yogsothoth/桌面/workspace-ppg/DataSet/PPG-BP/" + file_name + ".txt";
-            std::string filtered_file_zerophase = "/home/yogsothoth/桌面/workspace-ppg/DSPFilter/output_data/" + file_name + "_filtered_zerophase.txt";
-            std::string filtered_file_oneway = "/home/yogsothoth/桌面/workspace-ppg/DSPFilter/output_data/" + file_name + "_filtered_oneway.txt";
+            std::string filtered_file_zerophase = "/home/yogsothoth/桌面/workspace-ppg/output_data/" + file_name + "_filtered_zerophase.txt";
+            std::string filtered_file_oneway = "/home/yogsothoth/桌面/workspace-ppg/output_data/" + file_name + "_filtered_oneway.txt";
 
             std::cout << "\n" << std::string(60, '=') << std::endl;
             std::cout << "PPG信号处理 - 带通滤波" << std::endl;

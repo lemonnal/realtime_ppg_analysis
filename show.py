@@ -14,7 +14,7 @@ plt.rcParams['axes.unicode_minus'] = False
 
 # ==================== 配置开关 ====================
 USE_PHASE_COMPENSATION = True  # 是否使用相位延迟补偿（True=对齐波形, False=不对齐）
-OUTPUT_FIGURE_DIR = '/home/yogsothoth/桌面/workspace-ppg/DSPFilter/output_signal_figure'  # 输出图像目录
+OUTPUT_FIGURE_DIR = '/home/yogsothoth/桌面/workspace-ppg/output_signal_figure'  # 输出图像目录
 # ================================================
 
 # 创建输出目录
@@ -22,7 +22,7 @@ os.makedirs(OUTPUT_FIGURE_DIR, exist_ok=True)
 
 # 读取文件名（支持多行格式）
 record_name = 'record.txt'
-record_file_path = '/home/yogsothoth/桌面/workspace-ppg/DSPFilter/' + record_name
+record_file_path = '/home/yogsothoth/桌面/workspace-ppg/' + record_name
 try:
     with open(record_file_path, 'r') as f:
         # 读取所有行，去除每行的空白和空行
@@ -44,8 +44,8 @@ except Exception as e:
 for file_name in file_list:
     # 文件路径
     original_file = '/home/yogsothoth/桌面/workspace-ppg/DataSet/PPG-BP/' + file_name + '.txt'
-    # filtered_file = '/home/yogsothoth/桌面/workspace-ppg/DSPFilter/output_data/' + file_name + '_filtered_zerophase.txt'
-    filtered_file = '/home/yogsothoth/桌面/workspace-ppg/DSPFilter/output_data/' + file_name + '_filtered_oneway.txt'
+    # filtered_file = '/home/yogsothoth/桌面/workspace-ppg/output_data/' + file_name + '_filtered_zerophase.txt'
+    filtered_file = '/home/yogsothoth/桌面/workspace-ppg/output_data/' + file_name + '_filtered_oneway.txt'
 
     print("=" * 60)
     print("读取原始PPG数据...")
