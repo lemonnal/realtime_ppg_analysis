@@ -19,15 +19,15 @@ BUILD_TYPE="Release"  # 可选: Debug, Release, RelWithDebInfo, MinSizeRel
 PARALLEL_JOBS=$(nproc)  # 使用所有可用CPU核心
 
 # 可执行文件名称
-EXECUTABLE="$BUILD_DIR/main_example"
+EXECUTABLE="$BUILD_DIR/offline_main"
 
 echo -e "${BLUE}=========================================${NC}"
-echo -e "${BLUE}  DSPFilter 构建脚本${NC}"
+echo -e "${BLUE}  PPG离线信号处理系统 - 构建脚本${NC}"
 echo -e "${BLUE}=========================================${NC}"
 echo ""
 
 # 解析命令行参数
-CLEAN_BUILD=false
+CLEAN_BUILD=true  # 默认清理后重新构建
 SKIP_RUN=false
 BUILD_TYPE="Release"
 
@@ -49,16 +49,17 @@ while [[ $# -gt 0 ]]; do
             echo "用法: $0 [选项]"
             echo ""
             echo "选项:"
-            echo "  -c, --clean      清理构建目录后重新构建"
             echo "  -d, --debug      使用 Debug 模式构建（默认: Release）"
             echo "  -n, --no-run     构建但不运行程序"
             echo "  -h, --help       显示此帮助信息"
             echo ""
+            echo "注意: 默认会清理构建目录后重新构建"
+            echo ""
             echo "示例:"
-            echo "  $0               # 标准构建并运行"
-            echo "  $0 -c            # 清理后重新构建"
-            echo "  $0 -d            # Debug 模式构建"
-            echo "  $0 -c -d -n      # 清理+Debug构建+不运行"
+            echo "  $0               # 清理并重新构建（Release模式）"
+            echo "  $0 -d            # 清理并重新构建（Debug模式）"
+            echo "  $0 -n            # 清理并构建但不运行"
+            echo "  $0 -d -n         # Debug模式+不运行"
             exit 0
             ;;
         *)
@@ -122,7 +123,7 @@ fi
 # 运行程序
 if [ "$SKIP_RUN" = false ]; then
     echo -e "${BLUE}=========================================${NC}"
-    echo -e "${BLUE}🚀 运行程序${NC}"
+    echo -e "${BLUE}🚀 运行离线处理程序${NC}"
     echo -e "${BLUE}=========================================${NC}"
     echo ""
 
